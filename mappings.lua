@@ -3,7 +3,7 @@
 -- Please use this mappings table to set keyboard mapping since this is the
 -- lower level configuration and more robust one. (which-key will
 -- automatically pick-up stored data by this setting.)
-return {
+maps = {
   -- first key is the mode
   n = {
     -- second key is the lefthand side of the map
@@ -110,3 +110,22 @@ return {
   },
   x = {},
 }
+
+local utils = require "astronvim.utils"
+if utils.is_available "toggleterm.nvim" then
+  if vim.fn.executable "lazy_migrate" == 1 then
+    maps.n["<leader>tm"] = {
+      function()
+        utils.toggle_term_cmd "lazy_migrate"
+
+        local term_buf = astronvim.user_terminals["lazy_migrate"][1].bufnr
+        vim.api.nvim_buf_set_keymap(term_buf, "t", "j", "<Down>", { noremap = true, silent = false })
+        vim.api.nvim_buf_set_keymap(term_buf, "t", "k", "<Up>", { noremap = true, silent = false })
+        vim.api.nvim_buf_set_keymap(term_buf, "t", "q", "<C-c>", { noremap = true, silent = false })
+      end,
+      desc = "ToggleTerm lazy_migrate",
+    }
+  end
+end
+
+return maps

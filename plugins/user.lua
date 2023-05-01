@@ -132,4 +132,9 @@ return {
   --     }
   --   end,
   -- },
+  { "vim-ruby/vim-ruby", lazy = false },
+  { "tpope/vim-rails", lazy = false },
+  { "tpope/vim-rbenv", lazy = false },
+  { "tpope/vim-bundler", lazy = false },
+  -- TODO: tpope/vim-dadbod
 }
